@@ -2,49 +2,41 @@ use uni;
 
 create table if not exists uni.student
 (
-    sname varchar not null,
-    snr int not null,
+    sname varchar(8) not null,
+    snr int,
     ssn int,
     brn int,
-    addr varchar,
-    addr2 varchar,
+    addr varchar(8),
+    addr2 varchar(8),
     tlf int,
-    fcode varchar,
-    s_program varchar,
-    level varchar,
+    fcode varchar(8),
+    s_program varchar(8),
+    level varchar(8),
     primary key(sname)
-    constraint fcode_fkey
-	foreign key(fname) references faculty(fname)
-	on delete cascade
-	on update no action
 );
 
 create table if not exists uni.faculty
 (
-    fname varchar not null,
-    fin varchar not null,
+    fname varchar(8) not null,
+    fcode varchar(8) not null,
     tfl int,
     addr int,
     primary key(fname,fin)
+    constraint fname_fkey
+	       foreign key(fname) references course_schedule(fname)
+	       on delete cascade
+	       on update no action
 );
 
 create table if not exists uni.course_schedule
 (
-    cname varchar not null,
-    ccode varchar,
+    cname varchar(8) not null,
+    ccode varchar(8),
     hours float,
-    fname varchar,
-    professor varchar,
+    fname varchar(8),
+    professor varchar(8),
     snr int,
     grade varchar(1),
     cyear int,
-    primary key(cname),
-    constraint fcode_fkey
-	foreign key(fname) references faculty(fname)
-	on delete cascade
-	on update no action,
-    constraint snr_fkey
-	foreign key(snr) references student(snr)
-	on delete cascade
-	on update no action
+    primary key(cname)
 );
