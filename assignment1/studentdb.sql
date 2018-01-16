@@ -1,42 +1,71 @@
 use uni;
 
-create table if not exists uni.student
+create table if not exists uni.course_schedule
 (
-    sname varchar(8) not null,
-    snr int,
-    ssn int,
-    brn int,
-    addr varchar(8),
-    addr2 varchar(8),
-    tlf int,
-    fcode varchar(8),
-    s_program varchar(8),
-    level varchar(8),
-    primary key(sname)
+    CCODE varchar(8) not null,
+    CYEAR varchar(8) not null,
+    TEACHER varchar(8),
+    primary key(CCODE,CYEAR)
+);
+
+create table if not exists uni.grades
+(
+    CCODE varchar(8) not null,
+    SNR int not null,
+    grade varchar(1),
+    primary key(CCODE)
 );
 
 create table if not exists uni.faculty
 (
-    fname varchar(8) not null,
-    fcode varchar(8) not null,
-    tfl int,
-    addr int,
-    primary key(fname,fin)
-    constraint fname_fkey
-	       foreign key(fname) references course_schedule(fname)
-	       on delete cascade
-	       on update no action
+    FCODE varchar(8) not null,
+    FNAME varchar(8) not null,
+    TLF int,
+    ADDR int,
+    primary key(FCODE)
 );
 
-create table if not exists uni.course_schedule
+create table if not exists uni.course_enrollment
 (
-    cname varchar(8) not null,
-    ccode varchar(8),
-    hours float,
-    fname varchar(8),
-    professor varchar(8),
-    snr int,
-    grade varchar(1),
-    cyear int,
-    primary key(cname)
+    BIRTH_NUMBER int  not null,
+    CCODE varchar(8),
+    CYEAR int,
+    primary key(BIRTH_NUMBER),
+    constraint CCODE_fk foreign key (CCODE)
+    references course_schedule(CCODE)
+);
+
+create table if not exists uni.student
+(
+    SNR int not null,
+    SNAME varchar(8),
+    BIRTH_NUMBER int not null,
+    ADDR varchar(8),
+    ADDR2 varchar(8),
+    TLF int,
+    primary key(SNR),
+    constraint BIRTH_NUMBER_fk foreign key (BIRTH_NUMBER)
+    references course_enrollment(BIRTH_NUMBER)
+);
+
+create table if not exists uni.study_program
+(
+    SP_ID varchar(8) not null,
+    SP_NAME varchar(8),
+    STUDY_LEVEL float,
+    FCODE varchar(8) not null,
+    primary key (SP_ID),
+    constraint FCODE_fk foreign key (FCODE)
+    references faculty(FCODE)
+);
+
+create table if not exists uni.course
+(
+    CCODE varchar(8) not null,
+    CNAME varchar(8),
+    HOURS float,
+    SP_ID varchar(8) not null,
+    primary key(CCODE),
+    constraint SP_ID_fk foreign key (SP_ID)
+    references study_program(SP_ID)
 );
