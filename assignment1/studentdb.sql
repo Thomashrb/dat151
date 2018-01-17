@@ -43,6 +43,8 @@ create table if not exists uni.student
     ADDR varchar(8),
     ADDR2 varchar(8),
     TLF int,
+    SEX varchar(1),
+    SYEAR int,
     primary key(SNR),
     constraint BIRTH_NUMBER_fk foreign key (BIRTH_NUMBER)
     references course_enrollment(BIRTH_NUMBER)
