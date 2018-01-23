@@ -13,4 +13,6 @@ executable task5
   build-depends:       base < 5
                      , turtle
                      , bytestring
+                     , text
+                     , directory
   default-language:    Haskell2010
