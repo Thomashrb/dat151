@@ -1,0 +1,12 @@
+_arrangement_
+| arrID | arrName | arrTime | arrSpaces |
+|-------+---------+---------+-----------+
+
+_participant_
+| pID | pFname | pLname |
+|-----+--------+--------|
+
+_tickets_
+| pID | arrID | numTickets |
+|-----+-------+------------|
+
