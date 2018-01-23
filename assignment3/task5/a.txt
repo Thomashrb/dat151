@@ -1,0 +1,5 @@
+
+6;Stolzekleiven opp;2017-09-12 10:00:00;50000;1357859;Helland;Unto;
+9;Knarvikmila;2017-06-23 08:30:00;53000;4346917;Norheim;Marit;
+7;Led Zeppelin at Koengen;2017-07-12 07:30:00;25000;4234474;Langerud;Walther;
+2;The 7-mountain hike;2017-05-23 09:00:00;32000;1639433;Bremnes;Victoria;

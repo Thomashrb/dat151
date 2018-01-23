@@ -19,7 +19,7 @@ create table if not exists task5.participant
 drop table if exists task5.arrangement;
 create table if not exists task5.arrangement
 (
-    arrID int NOT NULL AUTO_INCREMENT,
+    arrID int NOT NULL,
     arrName varchar(8),
     arrTime date,
     arrSpaces int,
