@@ -10,9 +10,9 @@ use task5;
 drop table if exists task5.participant;
 create table if not exists task5.participant
 (
-    pID int NOT NULL AUTO_INCREMENT,
-    pFname varchar(8),
-    pLname varchar(8),
+    pID int NOT NULL,
+    pFname varchar(22),
+    pLname varchar(22),
     primary key(pID)
 );
 
@@ -20,7 +20,7 @@ drop table if exists task5.arrangement;
 create table if not exists task5.arrangement
 (
     arrID int NOT NULL,
-    arrName varchar(8),
+    arrName varchar(22),
     arrTime date,
     arrSpaces int,
     primary key(arrID)
