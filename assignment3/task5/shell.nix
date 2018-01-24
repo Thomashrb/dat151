@@ -4,8 +4,7 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, base, bytestring, directory, stdenv, text
-      , turtle
+  f = { mkDerivation, base, directory, split, stdenv, text, turtle
       }:
       mkDerivation {
         pname = "task5";
@@ -13,9 +12,7 @@ let
         src = ./.;
         isLibrary = false;
         isExecutable = true;
-        executableHaskellDepends = [
-          base bytestring directory text turtle
-        ];
+        executableHaskellDepends = [ base directory split text turtle ];
         license = stdenv.lib.licenses.mit;
       };
 
