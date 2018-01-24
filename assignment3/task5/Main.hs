@@ -20,7 +20,7 @@ load file = do
   path <- getCurrentDirectory
   tabsraw <- readFile $ path ++ "/" ++ file
   let rows  = parse tabsraw
-  print rows
+--  print rows
   runInserts rows
 
 runInserts :: [TableRow] -> IO ()
@@ -106,4 +106,3 @@ arrangementInsert = pack $
   ++ "(11,'Stones at Koengen','2017-06-13 09:00:00',24000),"
   ++ "(12,'Kygo at Brann Stadion','2017-07-15 10:20:00',21000)"
   ++ end
->>>>>>> splitOnParse
