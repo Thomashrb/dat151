@@ -2,11 +2,10 @@ _arrangement_
 | arrID | arrName | arrTime | arrSpaces |
 |-------+---------+---------+-----------+
 
-_participant_
+_person_
 | pID | pFname | pLname |
 |-----+--------+--------|
 
-_tickets_
-| pID | arrID | numTickets |
-|-----+-------+------------|
-
+_participant_
+| pID | arrID |
+|-----+-------|

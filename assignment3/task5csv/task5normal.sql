@@ -4,10 +4,32 @@
 --drop database if exists task5;
 --create database task5;
 
+drop database if exists task5;
+create database task5;
 use task5;
 
-drop table if exists task5.participant;
-create table if not exists task5.participant
+drop table if exists task5.allrow;
+create table if not exists task5.allrow
+(
+    arrID varchar(25),
+    arrName varchar(25),
+    arrTime varchar(25),
+    arrSpaces varchar(25),
+    pID varchar(25),
+    pFname varchar(25),
+    pLname varchar(25)
+);
+
+LOAD DATA LOCAL INFILE '/home/user/Git/dat151/assignment3/task5csv/data.csv'
+INTO TABLE allrow
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\n'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+ (arrID, arrName, arrTime, arrSpaces, pID, pFname, pLname);
+
+
+drop table if exists task5.person;
+create table if not exists task5.person
 (
     pID int NOT NULL,
     pFname varchar(15),
@@ -25,14 +47,13 @@ create table if not exists task5.arrangement
     primary key(arrID)
 );
 
-drop table if exists task5.tickets;
-create table if not exists task5.tickets
+drop table if exists task5.participant;
+create table if not exists task5.participant
 (
     pID int NOT NULL,
     arrID int NOT NULL,
-    ticketType char(1),
     primary key(pID,arrID),
-    foreign key (pID) references task5.participant (pID),
+    foreign key (pID) references task5.person (pID),
     foreign key (arrID) references task5.arrangement (arrID)
 );
 
@@ -50,9 +71,13 @@ insert into task5.arrangement (arrID,arrName,arrTime,arrSpaces) values
 (11,'Stones at Koengen','2017-06-13 09:00:00',24000),
 (12,'Kygo at Brann Stadion','2017-07-15 10:20:00',21000);
 
--- tickets insert
-INSERT INTO task5.tickets
-SELECT pID, arrID, 'N'
+INSERT INTO task5.person
+SELECT DISTINCT pID, pFname, pLname
+FROM task5.allrow;
+
+-- participant insert
+INSERT INTO task5.participant
+SELECT pID, arrID
 FROM task5.allrow;
 
 -- make procedure takeSeat
