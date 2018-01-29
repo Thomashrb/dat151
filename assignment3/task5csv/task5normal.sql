@@ -1,8 +1,6 @@
 -- usage:
 -- mysql -u dbuser -p task5 < task5.sql
 -- echo "select * from arrangement" | mysql -u dbuser task5
---drop database if exists task5;
---create database task5;
 
 drop database if exists task5;
 create database task5;
@@ -26,7 +24,6 @@ FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\n'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
  (arrID, arrName, arrTime, arrSpaces, pID, pFname, pLname);
-
 
 drop table if exists task5.person;
 create table if not exists task5.person
@@ -80,4 +77,48 @@ INSERT INTO task5.participant
 SELECT pID, arrID
 FROM task5.allrow;
 
--- make procedure takeSeat
+--i. Find the name of all participants that will attend more than one arrangement.
+select pFname, pLname from person
+inner join participant on person.pID = participant.pID
+group by participant.pID having count(*) > 1;
+
+--ii. Find the maximum number of arrangements that a single participant will attend.
+select count(*) from person
+inner join participant on person.pID = participant.pID
+group by participant.pID order by count(*)
+desc limit 1;
+
+--iii. List names of the participants that attend the largest number of arrangements.
+select count(*), pFname, pLname from person
+inner join participant on person.pID = participant.pID
+group by participant.pID order by count(*)
+desc limit 10;
+
+--iv. Some persons attend 3 arrangements. List all arrangements that they attend.
+select distinct participant.arrId from person
+inner join participant on person.pID = participant.pID
+group by participant.pID having count(*) = 3;
+
+
+-- takeSeat procedure
+-- (arrID,pID)
+DELIMITER $$
+CREATE PROCEDURE `takeSeat` (IN param1 INT, param2 INT)
+BEGIN
+    DECLARE var_arrSpaces INT;
+    START TRANSACTION;
+    SELECT arrSpaces INTO var_arrSpaces FROM arrangement WHERE arrID = param1;
+
+    IF var_arrSpaces > 0 THEN
+       INSERT INTO task5.participant values (param2, param1);
+    END IF;
+    COMMIT;
+
+END $$
+DELIMITER;
+
+-- show procedure
+-- SELECT routine_definition
+-- FROM information_schema.routines
+-- WHERE
+-- routine_name = 'takeSeat' AND routine_schema = 'task5';
