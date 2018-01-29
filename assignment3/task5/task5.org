@@ -1,3 +1,5 @@
+* Normalized
+
 _arrangement_
 | arrID | arrName | arrTime | arrSpaces |
 |-------+---------+---------+-----------+
@@ -9,3 +11,14 @@ _person_
 _participant_
 | pID | arrID |
 |-----+-------|
+
+
+* Denormalized
+
+_arrangement_
+| arrID | pID | arrName | arrTime | arrSpaces | availableSpaces |
+|-------+-----+---------+---------+-----------+-----------------|
+
+_person_
+| pID | pFname | pLname |
+|-----+--------+--------|
