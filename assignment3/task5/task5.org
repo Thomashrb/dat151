@@ -16,8 +16,8 @@ _participant_
 * Denormalized
 
 _arrangement_
-| arrID | pID | arrName | arrTime | arrSpaces | availableSpaces |
-|-------+-----+---------+---------+-----------+-----------------|
+| arrID | pID | arrName | arrTime | arrSpaces | pID |
+|-------+-----+---------+---------+-----------+-----|
 
 _person_
 | pID | pFname | pLname |
