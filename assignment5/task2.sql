@@ -83,21 +83,18 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Create 102000 instances
 DELIMITER $$
 CREATE PROCEDURE prepare_passing()
 BEGIN
   DECLARE i INT DEFAULT 1;
-  DECLARE y INT DEFAULT 1;
+  DECLARE limited INT DEFAULT 2;
   DECLARE reg CHAR(7) DEFAULT 'KH00000';
-  WHILE i < 35 DO
-	WHILE y < 3000 DO
-	  INSERT INTO  tolldb.passing (regno, tollstationID) VALUES (reg, FLOOR( RAND() * 9));
-	  SET reg = CONCAT('KH' ,LPAD(y,5,'0'));
-	  SET y = y + 1;
-	END WHILE;
-    SET y = 1;
+  WHILE i < 100001 DO
+    INSERT INTO  tolldb.passing (regno, tollstationID) VALUES (reg, FLOOR( RAND() * 9));
+    SET reg = CONCAT('KH' ,LPAD(limited,5,'0'));
+    SET limited = MOD(i,3000);
     SET i = i + 1;
+    DO SLEEP(0.1);
   END WHILE;
 END$$
 DELIMITER ;
@@ -105,7 +102,6 @@ DELIMITER ;
 -- Takes too long to run automaticly
 -- CALL prepare_carandsubscription();
 -- CALL prepare_passing();
-
 
 -- SELECT routine_definition
 -- FROM information_schema.routines
