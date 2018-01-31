@@ -15,10 +15,16 @@ _participant_
 
 * Denormalized
 
+Note this the Normalized model is better in our case
+
 _arrangement_
-| arrID | pID | arrName | arrTime | arrSpaces | pID |
-|-------+-----+---------+---------+-----------+-----|
+| arrID | arrName | arrTime | arrSpaces | totalAvailSpaces |
+|-------+---------+---------+-----------+------------------|
 
 _person_
 | pID | pFname | pLname |
 |-----+--------+--------|
+
+_participant_
+| pID | arrID |
+|-----+-------|
