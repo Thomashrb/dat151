@@ -18,7 +18,7 @@ create table if not exists task5.allrow
     pLname varchar(25)
 );
 
-LOAD DATA LOCAL INFILE '/home/user/Git/dat151/assignment3/task5csv/data.csv'
+LOAD DATA LOCAL INFILE '/home/bbsl/development/dat151/assignment3/task5csv/data.csv'
 INTO TABLE allrow
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\n'
 LINES TERMINATED BY '\n'
@@ -40,7 +40,7 @@ create table if not exists task5.arrangement
     arrID int NOT NULL,
     arrName varchar(25),
     arrTime date,
-    arrSpaces int,
+    arrSpaces int unsigned,
     primary key(arrID)
 );
 
@@ -105,15 +105,10 @@ group by participant.pID having count(*) = 3;
 DELIMITER $$
 CREATE PROCEDURE `takeSeat` (IN param1 INT, param2 INT)
 BEGIN
-    DECLARE var_arrSpaces INT;
     START TRANSACTION;
-    SELECT arrSpaces INTO var_arrSpaces FROM arrangement WHERE arrID = param1;
-
-    IF var_arrSpaces > 0 THEN
-       INSERT INTO task5.participant values (param2, param1);
-    END IF;
+    UPDATE arrangement SET arrSpaces=arrSpaces-1 WHERE arrID = param1;
+    INSERT INTO task5.participant values (param2, param1);
     COMMIT;
-
 END $$
 DELIMITER;
 
