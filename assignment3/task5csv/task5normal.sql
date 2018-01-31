@@ -1,6 +1,6 @@
 -- usage:
--- mysql -u dbuser -p task5 < task5.sql
--- echo "select * from arrangement" | mysql -u dbuser task5
+-- change infile path to match where you downloaded the -csv file
+-- mysql -u <dbuser> -p task5 < task5.sql
 
 drop database if exists task5;
 create database task5;
