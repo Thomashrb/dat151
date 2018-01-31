@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS tolldb.passing;
 CREATE TABLE if NOT EXISTS tolldb.passing
 (
     regno CHAR(7) NOT NULL,
-    time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    time_stamp TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
     tollstationID INT,
     PRIMARY KEY(regno,time_stamp),
     FOREIGN KEY (regno) REFERENCES tolldb.car (regno),
@@ -94,7 +94,6 @@ BEGIN
     SET reg = CONCAT('KH' ,LPAD(limited,5,'0'));
     SET limited = MOD(i,3000);
     SET i = i + 1;
-    DO SLEEP(0.1);
   END WHILE;
 END$$
 DELIMITER ;
