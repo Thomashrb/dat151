@@ -1,0 +1,27 @@
+* 1
+_passing_
+| regno | timestamp | station | name |
+|-------+-----------+---------+------|
+
+* 2
+_car_
+| regno | owner | totalTollPayed |
+|-------+-------+----------------|
+
+
+* 3
+_tollStation_
+| id | name |
+|----+------|
+
+_passing_
+| regno | timeStamp | station |
+|-------+-----------+---------|
+
+_evanger_
+| regno | timestamp |
+|-------+-----------|
+
+_fjosanger_
+| regno | timestamp |
+|-------+-----------|

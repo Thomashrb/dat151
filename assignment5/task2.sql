@@ -106,3 +106,8 @@ DELIMITER ;
 -- FROM information_schema.routines
 -- WHERE
 -- routine_name = 'prepare_carandsubscription' AND routine_schema = 'tolldb';
+
+--set profiling = 1;
+--run query
+--show profiles;
+--explain
