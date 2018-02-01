@@ -1,0 +1,35 @@
+* TODO-items
+*** TODO compress with timestamp
+- [ ] determine if utility is used or write a script
+*** TODO backup binary logs
+*** TODO setup crontab
+- [ ] show options used
+* Procedure
+*** backup
+FLUSH TABLES WITH READ LOCK;
+SHOW MASTER STATUS\G
+_write down file and position from status_
+mysqldump -B -F -u dbuser mysql > mysqldb_{file-suffix}_{position}.dump
+UNLOCK TABLES;
+
+It is extremely important that you write down the binlog file and position from the SHOW MASTER STATUS statement and somehow associate it with the dump file.
+One way to do this is to insert the binlog file name and position into the dump file name. In my example above, I did this by adding both to the dump file name db_000008_191_dump.sql.
+
+
+*** restore
+- LOAD FILE
+Let’s assume that we need to restore the entire database. First, we will import the dump file:
+mysql -u <user> -p < {dbname}db_{file-suffix}_{position}_.dump
+
+- APPLY CHANGES AFTER {position}
+mysqlbinlog --start-position={position} $DATA_DIR_PATH/mysql-bin.{file-suffix} | mysql -u <user> -p
+
+- INSERT BINLOG FILE
+mysqlbinlog $DATA_DIR_PATH/mysql-bin.{file-suffix} | mysql -u <user> -p
+
+*** note
+- F flush logs
+- B databases
+
+mysqldump -B -F -u dbuser mysql > mysqldb.dump
+mysqldump -B -F -u dbuser tolldb > tolldb.dump
