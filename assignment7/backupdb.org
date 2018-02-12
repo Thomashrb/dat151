@@ -2,7 +2,7 @@
 *** TODO compress with timestamp
 - [ ] determine if utility is used or write a script
 *** TODO backup binary logs
-*** TODO setup crontab
+*** TODO setup crontab [0/1]
 - [ ] show options used
 * Procedure
 *** backup
@@ -14,7 +14,6 @@ UNLOCK TABLES;
 
 It is extremely important that you write down the binlog file and position from the SHOW MASTER STATUS statement and somehow associate it with the dump file.
 One way to do this is to insert the binlog file name and position into the dump file name. In my example above, I did this by adding both to the dump file name db_000008_191_dump.sql.
-
 
 *** restore
 - LOAD FILE
