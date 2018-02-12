@@ -1,0 +1,8 @@
+hello
+hello2
+
+192.168.12.10 server.itzgeek.local server
+192.168.12.20 client.itzgeek.local client
+
+192.168.12.10 server.itzgeek.local server
+192.168.12.20 client.itzgeek.local client
