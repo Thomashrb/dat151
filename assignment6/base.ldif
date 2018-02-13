@@ -1,17 +1,17 @@
-dn: dc=itzgeek,dc=local
-dc: itzgeek
+dn: dc=dat151,dc=local
+dc: dat151
 objectClass: top
 objectClass: domain
 
-dn: cn=ldapadm ,dc=itzgeek,dc=local
+dn: cn=ldapadm ,dc=dat151,dc=local
 objectClass: organizationalRole
 cn: ldapadm
 description: LDAP Manager
 
-dn: ou=People,dc=itzgeek,dc=local
+dn: ou=People,dc=dat151,dc=local
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Group,dc=itzgeek,dc=local
+dn: ou=Group,dc=dat151,dc=local
 objectClass: organizationalUnit
 ou: Group

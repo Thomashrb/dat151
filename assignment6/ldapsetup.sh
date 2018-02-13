@@ -6,16 +6,16 @@
 #Locality Name (eg, city) [Default City]: XXXXXX
 #Organization Name (eg, company) [Default Company Ltd]:ITzGeek
 #Organizational Unit Name (eg, section) []:IT Infra
-#Common Name (eg, your name or your server's hostname) []:server.itzgeek.local
-#Email Address []:admin@itzgeek.com
+#Common Name (eg, your name or your server's hostname) []:server.dat151.local
+#Email Address []:admin@dat151.com
 
 # run this with sudo
 # enter into hosts file
-echo "192.168.12.10 server.itzgeek.local server
-      192.168.12.20 client.itzgeek.local client" >> /etc/hosts
+echo "192.168.12.10 server.dat151.local server
+      192.168.12.20 client.dat151.local client" >> /etc/hosts
 
 #Install ldap
-yum -y install openldap compat-openldap openldap-clients openldap-servers openldap-servers-sql openldap-devel
+#yum -y install openldap compat-openldap openldap-clients openldap-servers openldap-servers-sql openldap-devel
 
 #Start and enable ldap-service
 systemctl start slapd.service
@@ -31,7 +31,7 @@ ldapmodify -Y EXTERNAL  -H ldapi:/// -f db.ldif
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f monitor.ldif
 
 #Generate certificate and change its owner to ldap
-openssl req -new -x509 -nodes -out /etc/openldap/certs/itzgeekldapcert.pem -keyout /etc/openldap/certs/itzgeekldapkey.pem -days 365
+openssl req -new -x509 -nodes -out /etc/openldap/certs/dat151ldapcert.pem -keyout /etc/openldap/certs/dat151dapkey.pem -days 365
 chown -R ldap:ldap /etc/openldap/certs/*.pem
 
 #Configure LDAP to use secure communication using the generated certificate
@@ -47,4 +47,4 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 
 ##Build the shared directory structure with the diff and add the user with dc:
-ldapadd -x -W -D "cn=ldapadm,dc=itzgeek,dc=local" -f base.ldif
+ldapadd -x -W -D "cn=ldapadm,dc=dat151,dc=local" -f base.ldif

@@ -1,12 +1,12 @@
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
-olcSuffix: dc=itzgeek,dc=local
+olcSuffix: dc=dat151,dc=local
 
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootDN
-olcRootDN: cn=ldapadm,dc=itzgeek,dc=local
+olcRootDN: cn=ldapadm,dc=dat151,dc=local
 
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify

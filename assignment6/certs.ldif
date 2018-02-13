@@ -1,8 +1,8 @@
 angetype: modify
 replace: olcTLSCertificateFile
-olcTLSCertificateFile: /etc/openldap/certs/itzgeekldapcert.pem
+olcTLSCertificateFile: /etc/openldap/certs/dat151ldapcert.pem
 
 dn: cn=config
 changetype: modify
 replace: olcTLSCertificateKeyFile
-olcTLSCertificateKeyFile: /etc/openldap/certs/itzgeekldapkey.pem
+olcTLSCertificateKeyFile: /etc/openldap/certs/dat151ldapkey.pem
