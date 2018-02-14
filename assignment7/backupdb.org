@@ -18,13 +18,13 @@ One way to do this is to insert the binlog file name and position into the dump 
 *** restore
 - LOAD FILE
 Let’s assume that we need to restore the entire database. First, we will import the dump file:
-mysql -u <user> -p < {dbname}db_{file-suffix}_{position}_.dump
+mysql -u <user> -p < {dbname}db_{suffix}_{position}_.dump
 
 - APPLY CHANGES AFTER {position}
-mysqlbinlog --start-position={position} $DATA_DIR_PATH/mysql-bin.{file-suffix} | mysql -u <user> -p
+mysqlbinlog --start-position={position} $DATA_DIR_PATH/mysql-bin.{suffix} | mysql -u <user> -p
 
 - INSERT BINLOG FILE
-mysqlbinlog $DATA_DIR_PATH/mysql-bin.{file-suffix} | mysql -u <user> -p
+mysqlbinlog $DATA_DIR_PATH/mysql-bin.{suffix} | mysql -u <user> -p
 
 *** note
 - F flush logs
