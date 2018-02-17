@@ -16,6 +16,23 @@ It is extremely important that you write down the binlog file and position from 
 One way to do this is to insert the binlog file name and position into the dump file name. In my example above, I did this by adding both to the dump file name db_000008_191_dump.sql.
 
 *** restore
+- INSERT 1000 rows
+DELIMITER $$
+CREATE PROCEDURE populate1000()
+BEGIN
+  DECLARE i INT DEFAULT 1;
+  DECLARE limited INT DEFAULT 2;
+  DECLARE reg CHAR(7) DEFAULT 'KH00000';
+  WHILE i < 1001 DO
+    INSERT INTO  tolldb.passing (regno, tollstationID) VALUES (reg, FLOOR( RAND() * 9));
+    SET reg = CONCAT('KH' ,LPAD(limited,5,'0'));
+    SET limited = MOD(i,3000);
+    SET i = i + 1;
+  END WHILE;
+END$$
+DELIMITER ;
+
+
 - LOAD FILE
 Let’s assume that we need to restore the entire database. First, we will import the dump file:
 mysql -u <user> -p < {dbname}db_{suffix}_{position}_.dump
@@ -30,5 +47,5 @@ mysqlbinlog $DATA_DIR_PATH/mysql-bin.{suffix} | mysql -u <user> -p
 - F flush logs
 - B databases
 
-mysqldump -B -F -u dbuser mysql > mysqldb.dump
-mysqldump -B -F -u dbuser tolldb > tolldb.dump
+mysqldump -F -u dbuser mysql > mysqldb.dump
+mysqldump -F -u dbuser tolldb > tolldb.dump
