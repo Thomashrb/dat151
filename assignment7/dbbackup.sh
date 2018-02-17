@@ -6,6 +6,6 @@ suffix=$(echo "SHOW MASTER STATUS" | mysql -N tolldb | awk '{print $1}') | cut -
 position=$(echo "SHOW MASTER STATUS" | mysql -N tolldb | awk '{print $2}')
 
 #dump the db naming it according to the log position and numbering
-mysqldump -B -F -u root mysql > tolldb_$suffix_$position.dump
+mysqldump -B -F -u root tolldb > tolldb_$suffix_$position.dump
 
 echo "UNLOCK TABLES;" | mysql tolldb
